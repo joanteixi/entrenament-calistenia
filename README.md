@@ -31,12 +31,15 @@ npm run lint
 ```
 
 ## Desplegament
-Azure Static Web Apps (pla Free) via GitHub Actions a cada push a `main`.
+Azure Static Web Apps (pla Free) · `entrenament-calistenia` (rg-ia-test, West Europe)
 
-- SWA: `entrenament-calistenia` (rg-ia-test, West Europe)
 - URL: https://thankful-grass-0fa4f1c03.4.azurestaticapps.net
 
-El token de desplegament viu al secret `AZURE_STATIC_WEB_APPS_API_TOKEN` del repositori.
+Dues vies:
+- **Local (funciona sempre):** `./deploy.sh` — llegeix el token de `~/.config/entrenament-calistenia/swa-token`.
+- **CI:** GitHub Actions a cada push a `main`. Cal el secret `AZURE_STATIC_WEB_APPS_API_TOKEN`
+  (Settings → Secrets and variables → Actions). Mentre no hi sigui, el workflow es marca com
+  a saltat (no falla) i surt un warning.
 
 ## Origen del contingut
 Basat en el full de càlcul original (`deborah_buks.xlsx`). S'han corregit els noms
