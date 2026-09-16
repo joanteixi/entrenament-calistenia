@@ -19,20 +19,6 @@ jobs:
             echo "::warning title=Deploy saltat::Falta el secret AZURE_STATIC_WEB_APPS_API_TOKEN. Afegeix-lo a Settings > Secrets and variables > Actions, o desplega amb ./deploy.sh"
           fi
 
-      - name: Setup Node
-        if: steps.check.outputs.sense_secret != 'true'
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Install dependencies
-        if: steps.check.outputs.sense_secret != 'true'
-        run: npm ci
-
-      - name: Build
-        if: steps.check.outputs.sense_secret != 'true'
-        run: npm run build
-
       - name: Deploy to Azure Static Web Apps
         if: steps.check.outputs.sense_secret != 'true'
         uses: Azure/static-web-apps-deploy@v1
@@ -40,7 +26,7 @@ jobs:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
-          skip_app_build: true
+          skip_app_build: false
           skip_api_build: true
           app_location: /
           output_location: dist
