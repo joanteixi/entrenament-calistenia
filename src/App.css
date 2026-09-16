@@ -1,0 +1,172 @@
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px 14px 120px;
+}
+
+.card {
+  background: rgba(20, 26, 38, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+/* ── Porta (selecció de perfil) ── */
+.porta { text-align: center; margin-top: 12vh; }
+.title { font-size: 1.5rem; margin: 0 0 6px; }
+.subtitle { color: #94a3b8; margin: 0 0 22px; font-size: 0.92rem; }
+.etiqueta { color: #cbd5e1; font-size: 0.85rem; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 10px; }
+.perfils-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.btn-perfil {
+  background: linear-gradient(160deg, #1e3a8a, #3b82f6);
+  border: none; color: #fff; font-size: 1.05rem; font-weight: 600;
+  padding: 18px 10px; border-radius: 14px; cursor: pointer;
+}
+.btn-perfil:active { transform: scale(.98); }
+.gestor { margin-top: 16px; text-align: left; }
+.fila-perfil {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 8px 10px; background: rgba(255,255,255,.05); border-radius: 10px; margin-bottom: 6px;
+}
+.btn-x { background: none; border: none; color: #f87171; font-size: 1rem; cursor: pointer; }
+.afegir { display: flex; gap: 8px; margin-top: 8px; }
+.afegir input {
+  flex: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  color: #e6ebf2; padding: 10px; border-radius: 10px; font-size: .95rem;
+}
+
+/* ── Barres ── */
+.topbar {
+  display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
+}
+.perfil-pill {
+  background: rgba(59,130,246,.16); border: 1px solid rgba(59,130,246,.45);
+  color: #bfdbfe; padding: 7px 14px; border-radius: 999px; font-size: .9rem; font-weight: 600; cursor: pointer;
+}
+.topbar-accions { display: flex; gap: 8px; }
+.btn-ico {
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 10px; padding: 7px 11px; font-size: 1rem; cursor: pointer;
+}
+
+/* ── Tabs de mes ── */
+.tabs { display: flex; gap: 8px; margin-bottom: 10px; }
+.tab {
+  flex: 1; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: 10px 6px; cursor: pointer; color: #94a3b8; text-align: center;
+}
+.tab-on { background: rgba(59,130,246,.18); border-color: #3b82f6; color: #e6ebf2; }
+.tab-titol { display: block; font-weight: 700; font-size: .95rem; }
+.tab-sub { display: block; font-size: .7rem; opacity: .8; margin-top: 2px; }
+
+/* ── Dies ── */
+.dies { display: flex; gap: 8px; margin-bottom: 12px; }
+.dia-chip {
+  position: relative; overflow: hidden; flex: 1; padding: 10px 6px; border-radius: 12px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  color: #94a3b8; cursor: pointer; font-size: .9rem; font-weight: 600;
+}
+.dia-on { border-color: #a855f7; color: #e6ebf2; }
+.dia-fet { color: #4ade80; }
+.dia-nom { position: relative; z-index: 1; }
+.dia-pct {
+  position: absolute; left: 0; bottom: 0; height: 3px;
+  background: linear-gradient(90deg, #3b82f6, #a855f7);
+}
+
+/* ── Capçalera de sessió ── */
+.capcalera-sessio { background: rgba(30,41,59,.7); }
+.focus { font-size: .85rem; color: #93c5fd; font-weight: 600; margin-bottom: 10px; }
+.barra-gran { height: 8px; background: rgba(255,255,255,.08); border-radius: 999px; overflow: hidden; }
+.barra-fill { height: 100%; background: linear-gradient(90deg, #22c55e, #3b82f6); transition: width .25s; }
+.llegenda { display: flex; justify-content: space-between; color: #94a3b8; font-size: .8rem; margin-top: 6px; }
+.accions-sessio { display: flex; gap: 8px; margin-top: 12px; }
+
+.btn {
+  border: none; border-radius: 12px; padding: 12px 16px; font-size: .95rem;
+  font-weight: 600; cursor: pointer; flex: 1;
+}
+.btn-start { background: linear-gradient(160deg, #16a34a, #22c55e); color: #052e16; }
+.btn-ghost { background: rgba(255,255,255,.08); color: #e6ebf2; border: 1px solid rgba(255,255,255,.12); }
+.btn-petit { padding: 10px 14px; background: #3b82f6; color: #fff; flex: 0 0 auto; }
+.btn-x-petit { background: rgba(248,113,113,.14); color: #fca5a5; flex: 0 0 auto; border: 1px solid rgba(248,113,113,.3); }
+
+/* ── Seccions ── */
+.seccio-titol { font-size: .95rem; margin: 0 0 8px; }
+.afegit {
+  font-size: .65rem; text-transform: uppercase; letter-spacing: .06em;
+  background: rgba(34,197,94,.16); color: #86efac; padding: 2px 7px; border-radius: 999px; margin-left: 6px;
+}
+.escalfament { background: rgba(34,197,94,.07); border-color: rgba(34,197,94,.2); }
+.escalfament ul, .extres ul { margin: 0; padding-left: 18px; color: #cbd5e1; font-size: .88rem; line-height: 1.6; }
+.extres { background: rgba(168,85,247,.07); border-color: rgba(168,85,247,.22); }
+.extres li { margin-bottom: 8px; }
+.extres-detall { display: block; color: #94a3b8; font-size: .8rem; }
+.subtitol-petit { color: #94a3b8; font-size: .82rem; margin: 0 0 8px; }
+
+/* ── Exercicis ── */
+.exercici { padding: 14px; }
+.ex-complet { border-color: rgba(34,197,94,.45); background: rgba(34,197,94,.06); }
+.ex-capcalera { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.ex-num {
+  flex: 0 0 26px; height: 26px; border-radius: 8px; background: rgba(59,130,246,.2);
+  color: #bfdbfe; display: grid; place-items: center; font-size: .8rem; font-weight: 700;
+}
+.ex-nom { font-size: 1rem; margin: 0; flex: 1; line-height: 1.25; }
+.tick { color: #4ade80; font-weight: 700; }
+.badges { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.badge {
+  font-size: .74rem; padding: 3px 9px; border-radius: 999px;
+  background: rgba(255,255,255,.07); color: #cbd5e1;
+}
+.badge-series { background: rgba(59,130,246,.2); color: #bfdbfe; }
+.badge-descans { background: rgba(250,204,21,.14); color: #fde68a; }
+.obs { font-size: .82rem; color: #94a3b8; margin: 0 0 10px; line-height: 1.45; font-style: italic; }
+.series { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.serie {
+  width: 46px; height: 46px; border-radius: 12px; font-size: .95rem; font-weight: 700;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12);
+  color: #cbd5e1; cursor: pointer;
+}
+.serie-feta { background: linear-gradient(160deg, #15803d, #22c55e); border-color: #22c55e; color: #052e16; }
+.serie:active { transform: scale(.94); }
+.video {
+  margin-left: auto; text-decoration: none; font-size: .8rem; font-weight: 600;
+  background: rgba(239,68,68,.16); color: #fca5a5; border: 1px solid rgba(239,68,68,.35);
+  padding: 8px 12px; border-radius: 10px;
+}
+.nota {
+  width: 100%; margin-top: 10px; background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.09); color: #e6ebf2; border-radius: 10px;
+  padding: 9px 11px; font-size: .85rem;
+}
+.nota::placeholder { color: #64748b; }
+
+/* ── Historial ── */
+.llista-historial { list-style: none; margin: 0; padding: 0; }
+.llista-historial li {
+  display: flex; gap: 10px; padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,.06); font-size: .88rem;
+}
+.cita { color: #93c5fd; font-variant-numeric: tabular-nums; }
+.buit { color: #94a3b8; font-size: .9rem; }
+
+/* ── Barra de descans ── */
+.rest-bar {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  background: rgba(15,23,42,.97); border-top: 1px solid rgba(59,130,246,.4);
+  backdrop-filter: blur(8px); padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+}
+.rest-fill {
+  position: absolute; top: 0; left: 0; height: 3px;
+  background: linear-gradient(90deg, #22c55e, #3b82f6); transition: width .95s linear;
+}
+.rest-cont { display: flex; justify-content: space-between; align-items: center; max-width: 720px; margin: 0 auto; }
+.rest-temps { font-size: 1.5rem; font-weight: 700; font-variant-numeric: tabular-nums; color: #86efac; }
+.btn-rest {
+  background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.14);
+  color: #e6ebf2; border-radius: 10px; padding: 8px 12px; margin-left: 8px; font-size: .85rem; cursor: pointer;
+}
+
+.peu { text-align: center; color: #64748b; font-size: .78rem; margin-top: 18px; }
