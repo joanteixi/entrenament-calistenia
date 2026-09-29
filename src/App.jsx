@@ -1,11 +1,22 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from 'react';
-import { MESOS, EXTRES } from './program';
+import { MESOS, EXTRES, ESTIRAMENT_SENSE_BARRA, SENSE_BARRA_INFO } from './program';
 import './App.css';
 
 const PERFILS_DEFECTE = ['Joan', 'Vero'];
 const K_PERFILS = 'cal_perfils';
 const K_ACTIU = 'cal_actiu';
 const K_PROGRES = 'cal_progres';
+const K_SENSE_BARRA = 'cal_sense_barra';
+
+// Mode "sense barra": canvia els exercicis que demanen barra pel seu equivalent
+// (camp `alt`) i els estiraments penjats per l'alternativa amb goma.
+function aplicaSenseBarra(d) {
+  return {
+    ...d,
+    exercicis: d.exercicis.map((e) => (e.barra && e.alt ? { ...e.alt, original: e.nom } : e)),
+    estiraments: d.estiraments.map((x) => (/barra/i.test(x) ? ESTIRAMENT_SENSE_BARRA : x)),
+  };
+}
 
 function avui() {
   const d = new Date();
@@ -56,11 +67,13 @@ export default function App() {
   const [veureHistorial, setVeureHistorial] = useState(false);
   const [editantPerfils, setEditantPerfils] = useState(false);
   const [nouPerfil, setNouPerfil] = useState('');
+  const [senseBarra, setSenseBarra] = useState(() => carrega(K_SENSE_BARRA, false));
   const tickRef = useRef(null);
 
   useEffect(() => { localStorage.setItem(K_PERFILS, JSON.stringify(perfils)); }, [perfils]);
   useEffect(() => { localStorage.setItem(K_PROGRES, JSON.stringify(progres)); }, [progres]);
   useEffect(() => { if (perfil) localStorage.setItem(K_ACTIU, JSON.stringify(perfil)); }, [perfil]);
+  useEffect(() => { localStorage.setItem(K_SENSE_BARRA, JSON.stringify(senseBarra)); }, [senseBarra]);
 
   // Temporitzador de descans
   useEffect(() => {
@@ -83,7 +96,12 @@ export default function App() {
   }, [rest]);
 
   const mes = MESOS[mesIdx];
-  const dia = mes.dies[diaIdx];
+  const diaBase = mes.dies[diaIdx];
+  const dia = useMemo(
+    () => (senseBarra ? aplicaSenseBarra(diaBase) : diaBase),
+    [diaBase, senseBarra],
+  );
+  const nAdaptats = dia.exercicis.filter((e) => e.original).length;
   const sesProg = (progres[perfil] && progres[perfil][dia.id]) || { sets: {}, notes: {}, fet: null };
 
   const totalSeries = useMemo(
@@ -176,7 +194,7 @@ export default function App() {
       <div className="app">
         <div className="card porta">
           <h1 className="title">💪 Entrenament Calistènia</h1>
-          <p className="subtitle">3 mesos · 3 dies per setmana · gomes i barra</p>
+          <p className="subtitle">3 mesos · 3 dies per setmana · gomes (barra o sense)</p>
           <p className="etiqueta">Qui entrena?</p>
           <div className="perfils-grid">
             {perfils.map((p) => (
@@ -320,6 +338,15 @@ export default function App() {
               </button>
               <button className="btn btn-x-petit" onClick={reiniciaSessio}>Reiniciar</button>
             </div>
+            <button
+              className={`toggle-barra ${senseBarra ? 'on' : ''}`}
+              onClick={() => setSenseBarra((v) => !v)}
+              aria-pressed={senseBarra}
+              title="Canvia els exercicis que necessiten barra per alternatives a terra o amb goma"
+            >
+              <span className="switch" />
+              <span>Programa sense barra{senseBarra ? ' · actiu' : ''}</span>
+            </button>
           </div>
 
           <div className="card escalfament">
@@ -330,6 +357,22 @@ export default function App() {
               ))}
             </ul>
           </div>
+
+          {senseBarra && (
+            <div className="card info-sense-barra">
+              <h3 className="seccio-titol">🚫 Mode sense barra</h3>
+              <p className="subtitol-petit">
+                {nAdaptats > 0
+                  ? `${nAdaptats} exercici${nAdaptats === 1 ? '' : 's'} adaptat${nAdaptats === 1 ? '' : 's'} en aquesta sessió: els que demanaven barra s'han canviat per alternatives a terra o amb goma.`
+                  : 'Aquesta sessió ja es pot fer tota sense barra.'}
+              </p>
+              <ul>
+                {SENSE_BARRA_INFO.map((t, i) => (
+                  <li key={i}>{t}</li>
+                ))}
+              </ul>
+            </div>
+          )}
 
           {dia.exercicis.map((ex, i) => {
             const arr = sesProg.sets[i] || [];
@@ -346,7 +389,11 @@ export default function App() {
                   <span className="badge badge-series">{ex.series} sèries</span>
                   <span className="badge">{ex.reps}</span>
                   <span className="badge badge-descans">⏱ {ex.descans}s</span>
+                  {ex.original && <span className="badge badge-adaptat">🚫 adaptat</span>}
                 </div>
+                {ex.original && (
+                  <p className="ex-original">En lloc de: <strong>{ex.original}</strong></p>
+                )}
                 {ex.obs && <p className="obs">{ex.obs}</p>}
                 <div className="series">
                   {Array.from({ length: ex.series }).map((_, s) => (
@@ -384,7 +431,7 @@ export default function App() {
               <h3 className="seccio-titol">➕ Extres opcionals</h3>
               <p className="subtitol-petit">Forats del programa original. Fes-los al final, si et queda gas.</p>
               <ul>
-                {EXTRES.map((e, i) => (
+                {EXTRES.filter((e) => !(senseBarra && e.nom.startsWith('Remo horitzontal'))).map((e, i) => (
                   <li key={i}>
                     <strong>{e.nom}</strong>
                     <span className="extres-detall">{e.detall}</span>

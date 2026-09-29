@@ -14,6 +14,10 @@ Es poden afegir o treure perfils des de la pantalla inicial (⚙️ Gestionar pe
 
 ## Funcions
 - 3 mesos × 3 dies, amb el focus de cada sessió
+- **Mode "sense barra"** (toggle a la capçalera de sessió): canvia automàticament els
+  14 exercicis que demanen barra (dominades pronades/supinades, knee raises, tuck toes to bar)
+  per alternatives a terra o amb goma, i l'estirament penjat per un estirament de lats amb goma.
+  Es guarda al navegador i no toca el progrés ja marcat.
 - Marcatge de sèrie per sèrie amb **temporitzador de descans** automàtic (+15s / saltar)
 - Enllaç al vídeo de cada exercici (29 vídeos)
 - Nota lliure per exercici (quina goma has fet servir, sensacions…)
